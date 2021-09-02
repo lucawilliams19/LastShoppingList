@@ -27,7 +27,7 @@ app.use('/api/items', items);
 //serve static assests if in production
 if(process.env.NODE_ENV === 'production') {
     // set static folder
-    app.use(espress.static('client/build'))
+    app.use(express.static('client/build'))
 
     //loads this protocal unless a api interaction occurs with '/api/items'
     app.get('*', (req, res) => {
