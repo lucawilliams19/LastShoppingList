@@ -2,7 +2,8 @@
   "name": "shopping-list",
   "version": "1.0.0",
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "npm": "6.14.8"
   },
   "description": "Shopping list built with MERN stack",
   "main": "server.js",
@@ -12,7 +13,7 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && run build --prefix client"
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
