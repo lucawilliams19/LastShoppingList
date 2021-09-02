@@ -1,15 +1,17 @@
-//dependencies
-import {v4 as uuid} from 'uuid'
 
 //built components
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types'
+import { GET_ITEMS, 
+    ADD_ITEM, 
+    DELETE_ITEM, 
+    ITEMS_LOADING 
+} from '../actions/types'
 
 const initialState = {
     items: [],
     loading: false
 }
 
-export default function(state = initialState, action){
+function itemReducer(state = initialState, action){
     switch(action.type) {
             //GET_ITEMS retrieves items. Once data is recieved loading is set to off
         case GET_ITEMS:
@@ -38,3 +40,5 @@ export default function(state = initialState, action){
             return state
     }
 }
+
+export default itemReducer

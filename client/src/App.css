@@ -1,21 +1,12 @@
-.remove-btn{
-    margin-right: 0.5rem;
-}
+    * {
+        margin:0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-.fade-enter{
-    opacity: 0.01;
-}
+    #github {
+        text-decoration: none;
+        color: inherit;
+    }
 
-.fade-enter-active{
-    opacity: 1;
-    transition: opacity 1000ms ease-in;
-}
-
-.fade-exist{
-    opacity: 1;
-}
-
-.fade-exist-active{
-    opacity: 0.01;
-    transition: opaicty 1000ms ease-in;
-}
+    
