@@ -1,5 +1,6 @@
 // dependencies
 import React, {Component} from 'react'
+import { PropTypes } from 'prop-types'
 import {
     Button,
     Modal,
@@ -13,6 +14,7 @@ import {
     //allows binding of methods from other files
 import { connect } from 'react-redux'
 
+
 //built components
 import {addItem} from '../actions/itemActions'
 
@@ -22,6 +24,11 @@ class ItemModal extends Component {
         modal: false,
         name: ''
     }
+
+    static propTypes = {
+        isAutheniticated:PropTypes.bool
+    }
+
     //toggles between opening and closing the text box
     toggle = () => {
         this.setState({
@@ -52,12 +59,15 @@ class ItemModal extends Component {
     render() {
         return(
             <div>
-                <Button
+                { this.props.isAutheniticated ?  <Button
                     color='dark'
                     style={{marginBottom: '2rem'}}
                     onClick={this.toggle}
                 >Add Item
-                </Button>
+                </Button> : <h4 className='mb-3 ml-4'>Please Log in to manage items</h4>}
+
+
+                
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}
@@ -90,7 +100,8 @@ class ItemModal extends Component {
 
     //connects the 
 const mapStateToProps = state => ({
-    item: state.item
+    item: state.item,
+    isAutheniticated: state.auth.isAutheniticated
 })
     //"connect(mapStateToProps,{ addItem })" passes the method 'addItem' to ItemModal from ItemActions
 export default connect(mapStateToProps, { addItem })(ItemModal)

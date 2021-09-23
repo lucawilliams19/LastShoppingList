@@ -1,28 +1,36 @@
 //dependencies
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
 const path = require('path')
+const config = require('config')
 
-//built components
-const items = require('./routes/api/items')
 
 const app = express()
 
 //Body parser Middleware
-app.use(bodyParser.json())
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
 
 //DB config
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI')
 
 //connect to Mongo
 mongoose
-.connect(db)
+.connect(db, {
+    useUnifiedTopology: true,
+    useCreateIndexes: true,
+    useNewUrlParser: true 
+
+})// Adding new Mongo url parser
 .then(() => console.log('MongoDB Connected...'))
 .catch(err => console.log(err));
 
 //Use Routes
-app.use('/api/items', items);
+app.use('/api/items', require('./routes/api/items'))
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 //serve static assests if in production
 if(process.env.NODE_ENV === 'production') {

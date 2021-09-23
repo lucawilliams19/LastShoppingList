@@ -9,6 +9,13 @@ import PropTypes from 'prop-types'
 import {getItems, deleteItem} from '../actions/itemActions'
 
 class ShoppingList extends Component{
+
+    static propTypes = {
+        getItems: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
+        isAutheniticated:PropTypes.bool
+    }
+
    componentDidMount() {
         this.props.getItems()
     }
@@ -26,12 +33,16 @@ class ShoppingList extends Component{
                         {items.map(({ _id, name}) => (
                             <CSSTransition key={_id} timeout={500} classNames='fade'>
                                 <ListGroupItem className='list-item'>
-                                    <Button
+
+                                    { this.props.isAutheniticated ?  <Button
                                         className='remove-btn'
                                         color='danger'
                                         size='sm'
                                         onClick={this.onDeleteClick.bind(this, _id)}
-                                    >&times;</Button>
+                                    >&times;</Button>: null }
+
+
+                                   
                                     {name}
                                 </ListGroupItem>
                             </CSSTransition>
@@ -43,13 +54,11 @@ class ShoppingList extends Component{
     }
 }
 
-ShoppingList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired
-}
+
 
 const mapStateToProps = ( state ) => ({
-    item: state.item
+    item: state.item,
+    isAutheniticated: state.auth.isAutheniticated
 })
 
 export default connect(mapStateToProps,

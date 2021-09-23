@@ -10,7 +10,21 @@ const ItemSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    completed: {
+        type: Boolean,
+        required: true,
+        default: false
+      },
+      dateCreated: {
+        type: Date,
+        required: true,
+        default: Date.now
+      },
+      dateCompleted:{
+        type: Date,
+        required: false,
+      }
 });
 
 
